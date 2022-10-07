@@ -1,30 +1,152 @@
-﻿namespace wfCapacitator
+﻿using libCapacitatorCalc;
+using System.Xml.XPath;
+
+namespace wfCapacitator
 {
     public partial class Form1 : Form
     {
+        private int whatTodo;
+
+        private libValueService.ValueService vs = new();
+
+        private Capacitator capacitator = new();
         public Form1()
         {
             InitializeComponent();
-            libValueService.ValueService vs = new();
-            comboBox1.DataSource = vs.PostFactors.Select(x => x.TextShort += "F").ToList();
-            comboBox2.DataSource = vs.PostFactors.Select(x => x.TextShort.Replace('F', 's')).ToList();
-            comboBox3.DataSource = vs.PostFactors.Select(x => x.TextShort.Replace('F', 's')).ToList();
-            comboBox4.DataSource = vs.PostFactors.Select(x => x.TextShort.Replace('F', 'A')).ToList();
-            comboBox5.DataSource = vs.PostFactors.Select(x => x.TextShort.Replace('F', 'Ω')).ToList();
-            comboBox6.DataSource = vs.PostFactors.Select(x => x.TextShort.Replace('F', 'V')).ToList();
+            //add the textSort of Postfactors to datasource of comboboxes and add the suffix 
+            cbCapacity.DataSource = vs.PostFactors.Select(x => x.TextShort + "F").ToList();
+            cbTau.DataSource = vs.PostFactors.Select(x => x.TextShort + "s").ToList();
+            cbChargeTime.DataSource = vs.PostFactors.Select(x => x.TextShort + "s").ToList();
+            cbCurrent.DataSource = vs.PostFactors.Select(x => x.TextShort + "A").ToList();
+            cbResistance.DataSource = vs.PostFactors.Select(x => x.TextShort + "Ω").ToList();
+            cbVoltage.DataSource = vs.PostFactors.Select(x => x.TextShort + "V").ToList();
         }
 
         private void clbToDo_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             //allow user to only check one item at a time
             for (int i = 0; i < clbToDo.Items.Count; ++i) if (i != e.Index) clbToDo.SetItemChecked(i, false);
-            if(e.Index == 0)
+
+            switch (e.Index)
             {
-                textBox2.Enabled = true;
-                textBox5.Enabled = true;
+                case 0:
+                    tbCapacity.ReadOnly = true;
+                    tbTau.ReadOnly = false;
+                    tbCurrent.ReadOnly = true;
+                    tbResistance.ReadOnly = false;
+                    tbVoltage.ReadOnly = true;
+                    break;
+
+                case 1:
+                    tbCapacity.ReadOnly = false;
+                    tbTau.ReadOnly = true;
+                    tbCurrent.ReadOnly = true;
+                    tbResistance.ReadOnly = false;
+                    tbVoltage.ReadOnly = true;
+                    break;
+
+                case 2:
+                    tbCapacity.ReadOnly = false;
+                    tbTau.ReadOnly = true;
+                    tbCurrent.ReadOnly = true;
+                    tbResistance.ReadOnly = false;
+                    tbVoltage.ReadOnly = true;
+                    break;
+
+                case 3:
+                    tbCapacity.ReadOnly = true;
+                    tbTau.ReadOnly = true;
+                    tbCurrent.ReadOnly = true;
+                    tbResistance.ReadOnly = false;
+                    tbVoltage.ReadOnly = false;
+                    break;
+
+                case 4:
+                    tbCapacity.ReadOnly = false;
+                    tbTau.ReadOnly = false;
+                    tbCurrent.ReadOnly = false;
+                    tbResistance.ReadOnly = true;
+                    tbVoltage.ReadOnly = false;
+                    break;
+
+                case 5:
+                    tbCapacity.ReadOnly = true;
+                    tbTau.ReadOnly = true;
+                    tbCurrent.ReadOnly = false;
+                    tbResistance.ReadOnly = false;
+                    tbVoltage.ReadOnly = true;
+                    break;
+
+                default:
+                    break;
             }
+            whatTodo = e.Index;
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            switch (whatTodo)
+            {
+                case 0:
+                    capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
+                    capacitator.Tau = vs.GetDecimal(tbTau.Text + cbTau.SelectedValue.ToString().Replace('s', ' ').Trim());
+                    capacitator.capacity = CapacitatorCalc.CalculateCapacity(capacitator.preResistance, capacitator.Tau);
+                    capacitator.chargingTime = CapacitatorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
+                    tbCapacity.Text = capacitator.capacity.ToString();
+                    tbChargeTime.Text = capacitator.chargingTime.ToString();
+                break;
+
+                case 1:
+                    capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
+                    capacitator.capacity = vs.GetDecimal(tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim());
+                    capacitator.chargingTime = CapacitatorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
+                    capacitator.Tau = CapacitatorCalc.CalculateTau(capacitator.preResistance, capacitator.capacity);
+                    tbTau.Text = capacitator.Tau.ToString();
+                    tbChargeTime.Text = capacitator.chargingTime.ToString();
+                break;
+
+                case 2:
+                    capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
+                    capacitator.capacity = vs.GetDecimal((tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim()));
+                    capacitator.chargingTime = CapacitatorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
+                    capacitator.Tau = CapacitatorCalc.CalculateTau(capacitator.preResistance, capacitator.capacity);
+                    tbTau.Text = capacitator.Tau.ToString();
+                    tbChargeTime.Text = capacitator.chargingTime.ToString();
+                break;
+
+                case 3:
+                    capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
+                    capacitator.supplyVoltage = vs.GetDecimal(tbVoltage.Text + cbVoltage.SelectedValue.ToString().Replace('V', ' ').Trim());
+                    capacitator.maxCurrent = CapacitatorCalc.CalculateMaxCurrent(capacitator.supplyVoltage, capacitator.preResistance);
+                    tbCurrent.Text = capacitator.maxCurrent.ToString();
+                break;
+
+                case 4:
+                    if(!String.IsNullOrEmpty(tbTau.Text) && !String.IsNullOrEmpty(tbCapacity.Text))
+                    {
+                    capacitator.Tau = vs.GetDecimal(tbTau.Text + cbTau.SelectedValue.ToString().Replace('s', ' ').Trim());
+                    capacitator.capacity = vs.GetDecimal(tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim());
+                    capacitator.preResistance = CapacitatorCalc.CalculatePreResistance(capacitator.Tau, capacitator.capacity);
+                    }
+                    else
+                    {
+                    capacitator.maxCurrent = vs.GetDecimal(tbCurrent.Text + cbCurrent.SelectedValue.ToString().Replace('A', ' ').Trim());
+                    capacitator.supplyVoltage = vs.GetDecimal(tbVoltage.Text + cbVoltage.SelectedValue.ToString().Replace('V', ' ').Trim());
+                    capacitator.preResistance = CapacitatorCalc.CalculatePreResistance(capacitator.supplyVoltage, capacitator.maxCurrent);
+                    }
+                    tbResistance.Text = capacitator.preResistance.ToString();
+                break;
+
+                case 5:
+                    capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
+                    capacitator.maxCurrent = vs.GetDecimal(tbCurrent.Text + cbCurrent.SelectedValue.ToString().Replace('A', ' ').Trim());
+                    capacitator.supplyVoltage = CapacitatorCalc.CalculateSupplyVoltage(capacitator.preResistance, capacitator.maxCurrent);
+                    tbVoltage.Text = capacitator.supplyVoltage.ToString();
+                break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

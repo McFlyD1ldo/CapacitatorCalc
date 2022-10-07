@@ -35,20 +35,20 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tbCapacity = new System.Windows.Forms.TextBox();
+            this.tbTau = new System.Windows.Forms.TextBox();
+            this.tbChargeTime = new System.Windows.Forms.TextBox();
+            this.tbCurrent = new System.Windows.Forms.TextBox();
+            this.tbResistance = new System.Windows.Forms.TextBox();
+            this.tbVoltage = new System.Windows.Forms.TextBox();
             this.clbToDo = new System.Windows.Forms.CheckedListBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.cbCapacity = new System.Windows.Forms.ComboBox();
+            this.cbTau = new System.Windows.Forms.ComboBox();
+            this.cbChargeTime = new System.Windows.Forms.ComboBox();
+            this.cbCurrent = new System.Windows.Forms.ComboBox();
+            this.cbResistance = new System.Windows.Forms.ComboBox();
+            this.cbVoltage = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -116,53 +116,53 @@
             this.label7.TabIndex = 6;
             this.label7.Text = "pre resistance";
             // 
-            // textBox1
+            // tbCapacity
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(139, 126);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 7;
+            this.tbCapacity.Location = new System.Drawing.Point(139, 126);
+            this.tbCapacity.Name = "tbCapacity";
+            this.tbCapacity.ReadOnly = true;
+            this.tbCapacity.Size = new System.Drawing.Size(100, 23);
+            this.tbCapacity.TabIndex = 7;
             // 
-            // textBox2
+            // tbTau
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(139, 190);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 8;
+            this.tbTau.Location = new System.Drawing.Point(139, 190);
+            this.tbTau.Name = "tbTau";
+            this.tbTau.ReadOnly = true;
+            this.tbTau.Size = new System.Drawing.Size(100, 23);
+            this.tbTau.TabIndex = 8;
             // 
-            // textBox3
+            // tbChargeTime
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(139, 247);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 23);
-            this.textBox3.TabIndex = 9;
+            this.tbChargeTime.Location = new System.Drawing.Point(139, 247);
+            this.tbChargeTime.Name = "tbChargeTime";
+            this.tbChargeTime.ReadOnly = true;
+            this.tbChargeTime.Size = new System.Drawing.Size(100, 23);
+            this.tbChargeTime.TabIndex = 9;
             // 
-            // textBox4
+            // tbCurrent
             // 
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(139, 306);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 23);
-            this.textBox4.TabIndex = 10;
+            this.tbCurrent.Location = new System.Drawing.Point(139, 306);
+            this.tbCurrent.Name = "tbCurrent";
+            this.tbCurrent.ReadOnly = true;
+            this.tbCurrent.Size = new System.Drawing.Size(100, 23);
+            this.tbCurrent.TabIndex = 10;
             // 
-            // textBox5
+            // tbResistance
             // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(139, 365);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 23);
-            this.textBox5.TabIndex = 11;
+            this.tbResistance.Location = new System.Drawing.Point(139, 365);
+            this.tbResistance.Name = "tbResistance";
+            this.tbResistance.ReadOnly = true;
+            this.tbResistance.Size = new System.Drawing.Size(100, 23);
+            this.tbResistance.TabIndex = 11;
             // 
-            // textBox6
+            // tbVoltage
             // 
-            this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(139, 422);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 23);
-            this.textBox6.TabIndex = 12;
+            this.tbVoltage.Location = new System.Drawing.Point(139, 422);
+            this.tbVoltage.Name = "tbVoltage";
+            this.tbVoltage.ReadOnly = true;
+            this.tbVoltage.Size = new System.Drawing.Size(100, 23);
+            this.tbVoltage.TabIndex = 12;
             // 
             // clbToDo
             // 
@@ -193,62 +193,63 @@
             this.label8.TabIndex = 14;
             this.label8.Text = "Calculate:";
             // 
-            // comboBox1
+            // cbCapacity
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(260, 126);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(88, 23);
-            this.comboBox1.TabIndex = 15;
+            this.cbCapacity.FormattingEnabled = true;
+            this.cbCapacity.Location = new System.Drawing.Point(260, 126);
+            this.cbCapacity.Name = "cbCapacity";
+            this.cbCapacity.Size = new System.Drawing.Size(88, 23);
+            this.cbCapacity.TabIndex = 15;
             // 
-            // comboBox2
+            // cbTau
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(260, 190);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(89, 23);
-            this.comboBox2.TabIndex = 16;
+            this.cbTau.FormattingEnabled = true;
+            this.cbTau.Location = new System.Drawing.Point(260, 190);
+            this.cbTau.Name = "cbTau";
+            this.cbTau.Size = new System.Drawing.Size(89, 23);
+            this.cbTau.TabIndex = 16;
             // 
-            // comboBox3
+            // cbChargeTime
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(260, 247);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(92, 23);
-            this.comboBox3.TabIndex = 17;
+            this.cbChargeTime.FormattingEnabled = true;
+            this.cbChargeTime.Location = new System.Drawing.Point(260, 247);
+            this.cbChargeTime.Name = "cbChargeTime";
+            this.cbChargeTime.Size = new System.Drawing.Size(92, 23);
+            this.cbChargeTime.TabIndex = 17;
             // 
-            // comboBox4
+            // cbCurrent
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(260, 306);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(93, 23);
-            this.comboBox4.TabIndex = 18;
+            this.cbCurrent.FormattingEnabled = true;
+            this.cbCurrent.Location = new System.Drawing.Point(260, 306);
+            this.cbCurrent.Name = "cbCurrent";
+            this.cbCurrent.Size = new System.Drawing.Size(93, 23);
+            this.cbCurrent.TabIndex = 18;
             // 
-            // comboBox5
+            // cbResistance
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(260, 365);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(93, 23);
-            this.comboBox5.TabIndex = 19;
+            this.cbResistance.FormattingEnabled = true;
+            this.cbResistance.Location = new System.Drawing.Point(260, 365);
+            this.cbResistance.Name = "cbResistance";
+            this.cbResistance.Size = new System.Drawing.Size(93, 23);
+            this.cbResistance.TabIndex = 19;
             // 
-            // comboBox6
+            // cbVoltage
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(260, 422);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(94, 23);
-            this.comboBox6.TabIndex = 20;
+            this.cbVoltage.FormattingEnabled = true;
+            this.cbVoltage.Location = new System.Drawing.Point(260, 422);
+            this.cbVoltage.Name = "cbVoltage";
+            this.cbVoltage.Size = new System.Drawing.Size(94, 23);
+            this.cbVoltage.TabIndex = 20;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(442, 430);
+            this.button1.Location = new System.Drawing.Point(423, 430);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(99, 23);
             this.button1.TabIndex = 21;
             this.button1.Text = "calculate";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -256,20 +257,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 506);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox6);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbVoltage);
+            this.Controls.Add(this.cbResistance);
+            this.Controls.Add(this.cbCurrent);
+            this.Controls.Add(this.cbChargeTime);
+            this.Controls.Add(this.cbTau);
+            this.Controls.Add(this.cbCapacity);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.clbToDo);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbVoltage);
+            this.Controls.Add(this.tbResistance);
+            this.Controls.Add(this.tbCurrent);
+            this.Controls.Add(this.tbChargeTime);
+            this.Controls.Add(this.tbTau);
+            this.Controls.Add(this.tbCapacity);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -293,20 +294,20 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
+        private TextBox tbCapacity;
+        private TextBox tbTau;
+        private TextBox tbChargeTime;
+        private TextBox tbCurrent;
+        private TextBox tbResistance;
+        private TextBox tbVoltage;
         private CheckedListBox clbToDo;
         private Label label8;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private ComboBox comboBox4;
-        private ComboBox comboBox5;
-        private ComboBox comboBox6;
+        private ComboBox cbCapacity;
+        private ComboBox cbTau;
+        private ComboBox cbChargeTime;
+        private ComboBox cbCurrent;
+        private ComboBox cbResistance;
+        private ComboBox cbVoltage;
         private Button button1;
     }
 }
