@@ -1,4 +1,5 @@
 ﻿using libCapacitatorCalc;
+using System.Text.RegularExpressions;
 using System.Xml.XPath;
 
 namespace wfCapacitator
@@ -13,7 +14,7 @@ namespace wfCapacitator
         public Form1()
         {
             InitializeComponent();
-            //add the textSort of Postfactors to datasource of comboboxes and add the suffix 
+            //add the textShort of Postfactors to datasource of comboboxes and add the suffix 
             cbCapacity.DataSource = vs.PostFactors.Select(x => x.TextShort + "F").ToList();
             cbTau.DataSource = vs.PostFactors.Select(x => x.TextShort + "s").ToList();
             cbChargeTime.DataSource = vs.PostFactors.Select(x => x.TextShort + "s").ToList();
@@ -27,6 +28,7 @@ namespace wfCapacitator
             //allow user to only check one item at a time
             for (int i = 0; i < clbToDo.Items.Count; ++i) if (i != e.Index) clbToDo.SetItemChecked(i, false);
 
+            //change the availability of input into the different textboxes depending on the values needed for calculating
             switch (e.Index)
             {
                 case 0:
@@ -80,6 +82,7 @@ namespace wfCapacitator
                 default:
                     break;
             }
+            //set the value of variable determining what calculations to do
             whatTodo = e.Index;
         }
 
@@ -87,6 +90,7 @@ namespace wfCapacitator
         {
             switch (whatTodo)
             {
+                //Calculate the capacity from tau and resistance and display the charging time aswell
                 case 0:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.Tau = vs.GetDecimal(tbTau.Text + cbTau.SelectedValue.ToString().Replace('s', ' ').Trim());
@@ -94,8 +98,9 @@ namespace wfCapacitator
                     capacitator.chargingTime = CapacitatorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
                     tbCapacity.Text = capacitator.capacity.ToString();
                     tbChargeTime.Text = capacitator.chargingTime.ToString();
-                break;
+                    break;
 
+                //Calculate tau from capacity and resistance and display the charging time aswell
                 case 1:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.capacity = vs.GetDecimal(tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim());
@@ -103,8 +108,9 @@ namespace wfCapacitator
                     capacitator.Tau = CapacitatorCalc.CalculateTau(capacitator.preResistance, capacitator.capacity);
                     tbTau.Text = capacitator.Tau.ToString();
                     tbChargeTime.Text = capacitator.chargingTime.ToString();
-                break;
+                    break;
 
+                //Calculate charging time from capacity and resistance and display tau aswell
                 case 2:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.capacity = vs.GetDecimal((tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim()));
@@ -112,41 +118,83 @@ namespace wfCapacitator
                     capacitator.Tau = CapacitatorCalc.CalculateTau(capacitator.preResistance, capacitator.capacity);
                     tbTau.Text = capacitator.Tau.ToString();
                     tbChargeTime.Text = capacitator.chargingTime.ToString();
-                break;
+                    break;
 
+                //calculate the maximum current from resistance and voltage
                 case 3:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.supplyVoltage = vs.GetDecimal(tbVoltage.Text + cbVoltage.SelectedValue.ToString().Replace('V', ' ').Trim());
                     capacitator.maxCurrent = CapacitatorCalc.CalculateMaxCurrent(capacitator.supplyVoltage, capacitator.preResistance);
                     tbCurrent.Text = capacitator.maxCurrent.ToString();
-                break;
+                    break;
 
+                //calculate the Resistance from either capacity and tau or current and voltage depending on the user input
                 case 4:
-                    if(!String.IsNullOrEmpty(tbTau.Text) && !String.IsNullOrEmpty(tbCapacity.Text))
+                    try
                     {
-                    capacitator.Tau = vs.GetDecimal(tbTau.Text + cbTau.SelectedValue.ToString().Replace('s', ' ').Trim());
-                    capacitator.capacity = vs.GetDecimal(tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim());
-                    capacitator.preResistance = CapacitatorCalc.CalculatePreResistance(capacitator.Tau, capacitator.capacity);
+                        if (!String.IsNullOrEmpty(tbTau.Text) && !String.IsNullOrEmpty(tbCapacity.Text))
+                        {
+                            capacitator.Tau = vs.GetDecimal(tbTau.Text + cbTau.SelectedValue.ToString().Replace('s', ' ').Trim());
+                            capacitator.capacity = vs.GetDecimal(tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim());
+                            capacitator.preResistance = CapacitatorCalc.CalculatePreResistance(capacitator.Tau, capacitator.capacity);
+                        }
+                        else
+                        {
+                            capacitator.maxCurrent = vs.GetDecimal(tbCurrent.Text + cbCurrent.SelectedValue.ToString().Replace('A', ' ').Trim());
+                            capacitator.supplyVoltage = vs.GetDecimal(tbVoltage.Text + cbVoltage.SelectedValue.ToString().Replace('V', ' ').Trim());
+                            capacitator.preResistance = CapacitatorCalc.CalculatePreResistance(capacitator.supplyVoltage, capacitator.maxCurrent);
+                        }
+                        tbResistance.Text = capacitator.preResistance.ToString();
                     }
-                    else
+                    catch (Exception)
                     {
-                    capacitator.maxCurrent = vs.GetDecimal(tbCurrent.Text + cbCurrent.SelectedValue.ToString().Replace('A', ' ').Trim());
-                    capacitator.supplyVoltage = vs.GetDecimal(tbVoltage.Text + cbVoltage.SelectedValue.ToString().Replace('V', ' ').Trim());
-                    capacitator.preResistance = CapacitatorCalc.CalculatePreResistance(capacitator.supplyVoltage, capacitator.maxCurrent);
+                        MessageBox.Show("Please enter a value for either tau and capacity or current and voltage");
                     }
-                    tbResistance.Text = capacitator.preResistance.ToString();
-                break;
+                    break;
 
+                //calculate the suppy Voltage from resistance and current 
                 case 5:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.maxCurrent = vs.GetDecimal(tbCurrent.Text + cbCurrent.SelectedValue.ToString().Replace('A', ' ').Trim());
                     capacitator.supplyVoltage = CapacitatorCalc.CalculateSupplyVoltage(capacitator.preResistance, capacitator.maxCurrent);
                     tbVoltage.Text = capacitator.supplyVoltage.ToString();
-                break;
+                    break;
 
                 default:
                     break;
             }
+        }
+
+
+        //the following methods replace any text input into the textboxes that is not a number with an empty string
+        private void tbCapacity_TextChanged(object sender, EventArgs e)
+        {
+            tbCapacity.Text = Regex.Replace(tbCapacity.Text, "[^0-9]", "");
+        }
+
+        private void tbTau_TextChanged(object sender, EventArgs e)
+        {
+            tbTau.Text = Regex.Replace(tbTau.Text, "[^0-9]", "");
+        }
+
+        private void tbChargeTime_TextChanged(object sender, EventArgs e)
+        {
+            tbChargeTime.Text = Regex.Replace(tbChargeTime.Text, "[^0-9]", "");
+        }
+
+        private void tbCurrent_TextChanged(object sender, EventArgs e)
+        {
+            tbCurrent.Text = Regex.Replace(tbCurrent.Text, "[^0-9]", "");
+        }
+
+        private void tbResistance_TextChanged(object sender, EventArgs e)
+        {
+            tbResistance.Text = Regex.Replace(tbResistance.Text, "[^0-9]", "");
+        }
+
+        private void tbVoltage_TextChanged(object sender, EventArgs e)
+        {
+            tbVoltage.Text = Regex.Replace(tbVoltage.Text, "[^0-9]", "");
         }
     }
 }

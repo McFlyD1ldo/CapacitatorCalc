@@ -123,6 +123,7 @@
             this.tbCapacity.ReadOnly = true;
             this.tbCapacity.Size = new System.Drawing.Size(100, 23);
             this.tbCapacity.TabIndex = 7;
+            this.tbCapacity.TextChanged += new System.EventHandler(this.tbCapacity_TextChanged);
             // 
             // tbTau
             // 
@@ -131,6 +132,7 @@
             this.tbTau.ReadOnly = true;
             this.tbTau.Size = new System.Drawing.Size(100, 23);
             this.tbTau.TabIndex = 8;
+            this.tbTau.TextChanged += new System.EventHandler(this.tbTau_TextChanged);
             // 
             // tbChargeTime
             // 
@@ -139,6 +141,7 @@
             this.tbChargeTime.ReadOnly = true;
             this.tbChargeTime.Size = new System.Drawing.Size(100, 23);
             this.tbChargeTime.TabIndex = 9;
+            this.tbChargeTime.TextChanged += new System.EventHandler(this.tbChargeTime_TextChanged);
             // 
             // tbCurrent
             // 
@@ -147,6 +150,7 @@
             this.tbCurrent.ReadOnly = true;
             this.tbCurrent.Size = new System.Drawing.Size(100, 23);
             this.tbCurrent.TabIndex = 10;
+            this.tbCurrent.TextChanged += new System.EventHandler(this.tbCurrent_TextChanged);
             // 
             // tbResistance
             // 
@@ -155,6 +159,7 @@
             this.tbResistance.ReadOnly = true;
             this.tbResistance.Size = new System.Drawing.Size(100, 23);
             this.tbResistance.TabIndex = 11;
+            this.tbResistance.TextChanged += new System.EventHandler(this.tbResistance_TextChanged);
             // 
             // tbVoltage
             // 
@@ -163,6 +168,7 @@
             this.tbVoltage.ReadOnly = true;
             this.tbVoltage.Size = new System.Drawing.Size(100, 23);
             this.tbVoltage.TabIndex = 12;
+            this.tbVoltage.TextChanged += new System.EventHandler(this.tbVoltage_TextChanged);
             // 
             // clbToDo
             // 
@@ -198,7 +204,7 @@
             this.cbCapacity.FormattingEnabled = true;
             this.cbCapacity.Location = new System.Drawing.Point(260, 126);
             this.cbCapacity.Name = "cbCapacity";
-            this.cbCapacity.Size = new System.Drawing.Size(88, 23);
+            this.cbCapacity.Size = new System.Drawing.Size(90, 23);
             this.cbCapacity.TabIndex = 15;
             // 
             // cbTau
@@ -206,7 +212,7 @@
             this.cbTau.FormattingEnabled = true;
             this.cbTau.Location = new System.Drawing.Point(260, 190);
             this.cbTau.Name = "cbTau";
-            this.cbTau.Size = new System.Drawing.Size(89, 23);
+            this.cbTau.Size = new System.Drawing.Size(90, 23);
             this.cbTau.TabIndex = 16;
             // 
             // cbChargeTime
@@ -214,7 +220,7 @@
             this.cbChargeTime.FormattingEnabled = true;
             this.cbChargeTime.Location = new System.Drawing.Point(260, 247);
             this.cbChargeTime.Name = "cbChargeTime";
-            this.cbChargeTime.Size = new System.Drawing.Size(92, 23);
+            this.cbChargeTime.Size = new System.Drawing.Size(90, 23);
             this.cbChargeTime.TabIndex = 17;
             // 
             // cbCurrent
@@ -222,7 +228,7 @@
             this.cbCurrent.FormattingEnabled = true;
             this.cbCurrent.Location = new System.Drawing.Point(260, 306);
             this.cbCurrent.Name = "cbCurrent";
-            this.cbCurrent.Size = new System.Drawing.Size(93, 23);
+            this.cbCurrent.Size = new System.Drawing.Size(90, 23);
             this.cbCurrent.TabIndex = 18;
             // 
             // cbResistance
@@ -230,7 +236,7 @@
             this.cbResistance.FormattingEnabled = true;
             this.cbResistance.Location = new System.Drawing.Point(260, 365);
             this.cbResistance.Name = "cbResistance";
-            this.cbResistance.Size = new System.Drawing.Size(93, 23);
+            this.cbResistance.Size = new System.Drawing.Size(90, 23);
             this.cbResistance.TabIndex = 19;
             // 
             // cbVoltage
@@ -238,14 +244,14 @@
             this.cbVoltage.FormattingEnabled = true;
             this.cbVoltage.Location = new System.Drawing.Point(260, 422);
             this.cbVoltage.Name = "cbVoltage";
-            this.cbVoltage.Size = new System.Drawing.Size(94, 23);
+            this.cbVoltage.Size = new System.Drawing.Size(90, 23);
             this.cbVoltage.TabIndex = 20;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(423, 430);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 23);
+            this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 21;
             this.button1.Text = "calculate";
             this.button1.UseVisualStyleBackColor = true;
