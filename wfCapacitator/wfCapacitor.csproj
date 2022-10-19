@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\libCapacitatorCalc\libCapacitatorCalc.csproj" />
+    <ProjectReference Include="..\libCapacitatorCalc\libCapacitorCalc.csproj" />
   </ItemGroup>
 
   <ItemGroup>

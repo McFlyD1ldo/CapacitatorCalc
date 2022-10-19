@@ -1,6 +1,6 @@
 ﻿namespace libCapacitatorCalc
 {
-    public class Capacitator
+    public class Capacitor
     {
         public decimal capacity { get; set; }
         public decimal supplyVoltage { get; set; }

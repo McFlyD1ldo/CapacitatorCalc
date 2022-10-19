@@ -10,7 +10,7 @@ namespace wfCapacitator
 
         private libValueService.ValueService vs = new();
 
-        private Capacitator capacitator = new();
+        private Capacitor capacitator = new();
         public Form1()
         {
             InitializeComponent();
@@ -94,8 +94,8 @@ namespace wfCapacitator
                 case 0:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.Tau = vs.GetDecimal(tbTau.Text + cbTau.SelectedValue.ToString().Replace('s', ' ').Trim());
-                    capacitator.capacity = CapacitatorCalc.CalculateCapacity(capacitator.preResistance, capacitator.Tau);
-                    capacitator.chargingTime = CapacitatorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
+                    capacitator.capacity = CapacitorCalc.CalculateCapacity(capacitator.preResistance, capacitator.Tau);
+                    capacitator.chargingTime = CapacitorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
                     tbCapacity.Text = capacitator.capacity.ToString();
                     tbChargeTime.Text = capacitator.chargingTime.ToString();
                     break;
@@ -104,8 +104,8 @@ namespace wfCapacitator
                 case 1:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.capacity = vs.GetDecimal(tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim());
-                    capacitator.chargingTime = CapacitatorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
-                    capacitator.Tau = CapacitatorCalc.CalculateTau(capacitator.preResistance, capacitator.capacity);
+                    capacitator.chargingTime = CapacitorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
+                    capacitator.Tau = CapacitorCalc.CalculateTau(capacitator.preResistance, capacitator.capacity);
                     tbTau.Text = capacitator.Tau.ToString();
                     tbChargeTime.Text = capacitator.chargingTime.ToString();
                     break;
@@ -114,8 +114,8 @@ namespace wfCapacitator
                 case 2:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.capacity = vs.GetDecimal((tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim()));
-                    capacitator.chargingTime = CapacitatorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
-                    capacitator.Tau = CapacitatorCalc.CalculateTau(capacitator.preResistance, capacitator.capacity);
+                    capacitator.chargingTime = CapacitorCalc.CalculateChargingTime(capacitator.preResistance, capacitator.capacity);
+                    capacitator.Tau = CapacitorCalc.CalculateTau(capacitator.preResistance, capacitator.capacity);
                     tbTau.Text = capacitator.Tau.ToString();
                     tbChargeTime.Text = capacitator.chargingTime.ToString();
                     break;
@@ -124,7 +124,7 @@ namespace wfCapacitator
                 case 3:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.supplyVoltage = vs.GetDecimal(tbVoltage.Text + cbVoltage.SelectedValue.ToString().Replace('V', ' ').Trim());
-                    capacitator.maxCurrent = CapacitatorCalc.CalculateMaxCurrent(capacitator.supplyVoltage, capacitator.preResistance);
+                    capacitator.maxCurrent = CapacitorCalc.CalculateMaxCurrent(capacitator.supplyVoltage, capacitator.preResistance);
                     tbCurrent.Text = capacitator.maxCurrent.ToString();
                     break;
 
@@ -136,13 +136,13 @@ namespace wfCapacitator
                         {
                             capacitator.Tau = vs.GetDecimal(tbTau.Text + cbTau.SelectedValue.ToString().Replace('s', ' ').Trim());
                             capacitator.capacity = vs.GetDecimal(tbCapacity.Text + cbCapacity.SelectedValue.ToString().Replace('F', ' ').Trim());
-                            capacitator.preResistance = CapacitatorCalc.CalculatePreResistance(capacitator.Tau, capacitator.capacity);
+                            capacitator.preResistance = CapacitorCalc.CalculatePreResistance(capacitator.Tau, capacitator.capacity);
                         }
                         else
                         {
                             capacitator.maxCurrent = vs.GetDecimal(tbCurrent.Text + cbCurrent.SelectedValue.ToString().Replace('A', ' ').Trim());
                             capacitator.supplyVoltage = vs.GetDecimal(tbVoltage.Text + cbVoltage.SelectedValue.ToString().Replace('V', ' ').Trim());
-                            capacitator.preResistance = CapacitatorCalc.CalculatePreResistance(capacitator.supplyVoltage, capacitator.maxCurrent);
+                            capacitator.preResistance = CapacitorCalc.CalculatePreResistance(capacitator.supplyVoltage, capacitator.maxCurrent);
                         }
                         tbResistance.Text = capacitator.preResistance.ToString();
                     }
@@ -156,7 +156,7 @@ namespace wfCapacitator
                 case 5:
                     capacitator.preResistance = vs.GetDecimal(tbResistance.Text + cbResistance.SelectedValue.ToString().Replace('Ω', ' ').Trim());
                     capacitator.maxCurrent = vs.GetDecimal(tbCurrent.Text + cbCurrent.SelectedValue.ToString().Replace('A', ' ').Trim());
-                    capacitator.supplyVoltage = CapacitatorCalc.CalculateSupplyVoltage(capacitator.preResistance, capacitator.maxCurrent);
+                    capacitator.supplyVoltage = CapacitorCalc.CalculateSupplyVoltage(capacitator.preResistance, capacitator.maxCurrent);
                     tbVoltage.Text = capacitator.supplyVoltage.ToString();
                     break;
 

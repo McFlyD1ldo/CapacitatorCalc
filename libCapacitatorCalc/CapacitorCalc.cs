@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace libCapacitatorCalc
 {
-    public static class CapacitatorCalc
+    public static class CapacitorCalc
     {
         public static decimal CalculateCapacity(decimal preResistance, decimal tau) => tau / preResistance;
 

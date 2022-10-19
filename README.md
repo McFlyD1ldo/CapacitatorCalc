@@ -1,4 +1,4 @@
-# CapacitatorCalc
+D# CapacitatorCalc
 Calculate different values of a capacitator
 Hello, this an application for calculating the different values related to a capacitator.
 This includes the time constant Tau aswell as charging time, capacity, supply voltage, the maximum current and pre resistance.
